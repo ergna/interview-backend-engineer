@@ -1,7 +1,7 @@
 package ergtec.repository;
 
 import ergtec.InterviewBackendEngineer;
-import ergtec.dtos.ImageWithAlbumName;
+import ergtec.api.response.ImageWithAlbumName;
 import ergtec.entities.ImageEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

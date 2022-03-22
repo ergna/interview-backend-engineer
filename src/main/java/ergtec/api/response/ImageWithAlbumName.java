@@ -1,4 +1,4 @@
-package ergtec.dtos;
+package ergtec.api.response;
 
 public class ImageWithAlbumName {
     public final int id;

@@ -1,6 +1,6 @@
 package ergtec.repository;
 
-import ergtec.dtos.ImageWithAlbumName;
+import ergtec.api.response.ImageWithAlbumName;
 import ergtec.entities.AlbumEntity;
 import ergtec.entities.ImageEntity;
 import org.springframework.data.domain.Page;
@@ -20,7 +20,7 @@ public interface IImageRepository extends JpaRepository<AlbumEntity, Integer> {
     @Query(value = "select i from image i where i.id = ?1")
     ImageEntity findImage(int id);
 
-    @Query(value = "select new ergtec.dtos.ImageWithAlbumName(i.id, i.title, i.url, a.title) from" +
+    @Query(value = "select new ergtec.api.response.ImageWithAlbumName(i.id, i.title, i.url, a.title) from" +
             " image i inner join album a on i.album.id = a.id where a.user.id = ?1")
     Page<ImageWithAlbumName> getImagesWithAlbumTitle(int userId, Pageable pageable);
 
