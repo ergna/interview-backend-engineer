@@ -18,7 +18,6 @@ class UserRepositoryTest {
     @Test
     void userByIdRepoTest() {
         UserEntity user = userRepository.findById(1);
-
         Assertions.assertEquals(1, user.id);
         Assertions.assertEquals("Leanne Graham", user.name);
         Assertions.assertEquals("Sincere@april.biz", user.email);

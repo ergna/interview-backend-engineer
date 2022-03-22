@@ -68,7 +68,6 @@ class ImageRepositoryTest {
     void imagesWithAlbumTitlesByUserIdSortAlbumTitleAscTest() {
         Order order = new Order(Sort.Direction.ASC, "album.title");
         ImageWithAlbumName image = getFirstElementOfResultSet(1, order);
-
         Assertions.assertTrue(image.id == 4849 || image.id == 4850);
     }
 
@@ -76,14 +75,12 @@ class ImageRepositoryTest {
     void imagesWithAlbumTitlesByUserIdSortAlbumTitleDescTest() {
         Order order = new Order(Sort.Direction.DESC, "album.title");
         ImageWithAlbumName image = getFirstElementOfResultSet(1, order);
-
         Assertions.assertTrue(image.id == 4851 || image.id == 4852 || image.id == 4853);
     }
 
     @Test
     void imagesByNonExistingUserIdRepoTest() {
         Pageable pageable = PageRequest.of(0, 10);
-
         Page<ImageWithAlbumName> result = imageRepository.getImagesWithAlbumTitle(11111, pageable);
         List<ImageWithAlbumName> images = result.getContent();
         Assertions.assertEquals(0, images.size());
@@ -92,7 +89,6 @@ class ImageRepositoryTest {
     private ImageWithAlbumName getFirstElementOfResultSet(int id, Order order) {
         Pageable pageable = PageRequest.of(0, 10, Sort.by(order));
         Page result = imageRepository.getImagesWithAlbumTitle(id, pageable);
-
         List<ImageWithAlbumName> images = result.getContent();
         return images.get(0);
     }

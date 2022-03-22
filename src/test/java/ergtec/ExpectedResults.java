@@ -6,6 +6,7 @@ import ergtec.api.response.UserAlbumsAggregate;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 public class ExpectedResults {
 
@@ -22,6 +23,14 @@ public class ExpectedResults {
         return "No user found";
     }
 
+    protected void compareUsers(User actualUser) {
+        User expectedUser = createExpectedUser();
+
+        Assertions.assertEquals(expectedUser.id, actualUser.id);
+        Assertions.assertEquals(expectedUser.name, actualUser.name);
+        Assertions.assertEquals(expectedUser.email, actualUser.email);
+    }
+
     protected void compareNoUserFoundErrors(String actualErrorMessage) {
         Assertions.assertEquals(expectedErrorMessage(), actualErrorMessage);
     }
@@ -30,6 +39,26 @@ public class ExpectedResults {
         Assertions.assertEquals(2, actualUserWithAlbums.albums.size());
         Assertions.assertEquals("Leanne Graham", actualUserWithAlbums.name);
         Assertions.assertEquals("3 sunt qui excepturi placeat culpa", actualUserWithAlbums.albums.get(0).title);
+    }
+
+    protected Pageable getPageable(int pageNo, int pageSize, Sort sortBy) {
+        return PageRequest.of(pageNo, pageSize, sortBy);
+    }
+
+    protected Sort getSortAlbumAsc() {
+        return Sort.by("album").ascending();
+    }
+
+    protected Sort getSortAlbumDesc() {
+        return Sort.by("album").descending();
+    }
+
+    protected Sort getSortImageAsc() {
+        return Sort.by("title").ascending();
+    }
+
+    protected Sort getSortImageDesc() {
+        return Sort.by("title").descending();
     }
 
 }

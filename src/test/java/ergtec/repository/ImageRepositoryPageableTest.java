@@ -1,5 +1,6 @@
 package ergtec.repository;
 
+import ergtec.ExpectedResults;
 import ergtec.InterviewBackendEngineer;
 import ergtec.api.response.ImageWithAlbumName;
 import org.junit.jupiter.api.Assertions;
@@ -7,12 +8,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 
 @SpringBootTest(classes = InterviewBackendEngineer.class)
-class ImageRepositoryPageableTest {
+class ImageRepositoryPageableTest extends ExpectedResults {
 
     @Autowired
     private IImageRepository imageRepository;
@@ -28,7 +27,7 @@ class ImageRepositoryPageableTest {
 
     @Test
     void imagesPageable05AlbumAsc() {
-        Pageable pageable = createPageable(0,5,createSortAlbumAsc());
+        Pageable pageable = getPageable(0,5, getSortAlbumAsc());
         Page<ImageWithAlbumName> imagePage = imageRepository.getImagesWithAlbumTitle(1, pageable);
 
         Assertions.assertEquals(0, imagePage.getNumber());
@@ -43,7 +42,7 @@ class ImageRepositoryPageableTest {
 
     @Test
     void imagesPageable13AlbumAsc() {
-        Pageable pageable = createPageable(1,3,createSortAlbumAsc());
+        Pageable pageable = getPageable(1,3, getSortAlbumAsc());
         Page<ImageWithAlbumName> imagePage = imageRepository.getImagesWithAlbumTitle(1, pageable);
 
         Assertions.assertEquals(1, imagePage.getNumber());
@@ -58,7 +57,7 @@ class ImageRepositoryPageableTest {
 
     @Test
     void imagesPageable05AlbumDesc() {
-        Pageable pageable = createPageable(0,5,createSortAlbumDesc());
+        Pageable pageable = getPageable(0,5, getSortAlbumDesc());
         Page<ImageWithAlbumName> imagePage = imageRepository.getImagesWithAlbumTitle(1, pageable);
 
         Assertions.assertEquals(0, imagePage.getNumber());
@@ -73,7 +72,7 @@ class ImageRepositoryPageableTest {
 
     @Test
     void imagesPageable05ImageAsc() {
-        Pageable pageable = createPageable(0,5,createSortImageAsc());
+        Pageable pageable = getPageable(0,5, getSortImageAsc());
         Page<ImageWithAlbumName> imagePage = imageRepository.getImagesWithAlbumTitle(1, pageable);
 
         Assertions.assertEquals(0, imagePage.getNumber());
@@ -88,7 +87,7 @@ class ImageRepositoryPageableTest {
 
     @Test
     void imagesPageable05ImageDesc() {
-        Pageable pageable = createPageable(0,5,createSortImageDesc());
+        Pageable pageable = getPageable(0,5, getSortImageDesc());
         Page<ImageWithAlbumName> imagePage = imageRepository.getImagesWithAlbumTitle(1, pageable);
 
         Assertions.assertEquals(0, imagePage.getNumber());
@@ -99,26 +98,6 @@ class ImageRepositoryPageableTest {
 
         Assertions.assertTrue(image.id == 4849 || image.id == 4850);
 
-    }
-
-    private Pageable createPageable(int pageNo, int pageSize, Sort sortBy) {
-        return PageRequest.of(pageNo, pageSize, sortBy);
-    }
-
-    private Sort createSortAlbumAsc() {
-        return Sort.by("album").ascending();
-    }
-
-    private Sort createSortAlbumDesc() {
-        return Sort.by("album").descending();
-    }
-
-    private Sort createSortImageAsc() {
-        return Sort.by("title").ascending();
-    }
-
-    private Sort createSortImageDesc() {
-        return Sort.by("title").descending();
     }
 
 }

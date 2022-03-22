@@ -19,7 +19,6 @@ class AlbumRepositoryTest {
     void albumByUserIdRepoTest() {
         List<AlbumEntity> albums = albumRepository.findByUserId(1);
         Assertions.assertEquals(2, albums.size());
-
         Assertions.assertEquals(1, albums.get(0).id);
         Assertions.assertEquals(2, albums.get(1).id);
     }
@@ -33,16 +32,12 @@ class AlbumRepositoryTest {
     @Test
     void albumByExistingUserIdWithNoAlbumsRepoTest() {
         List<AlbumEntity> albums = albumRepository.findByUserId(3);
-        System.out.println(albums);
-        System.out.println(albums.size());
         Assertions.assertEquals(0, albums.size());
     }
 
     @Test
     void albumByNonExistingUserIdRepoTest() {
         List<AlbumEntity> albums = albumRepository.findByUserId(1111);
-        System.out.println(albums);
-        System.out.println(albums.size());
         Assertions.assertEquals(0, albums.size());
     }
 
