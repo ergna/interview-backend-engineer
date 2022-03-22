@@ -44,7 +44,7 @@ public class UserController {
             @PathVariable Integer id,
             @RequestParam(defaultValue = "0") int pageNo,
             @RequestParam(defaultValue = "5") int pageSize,
-            @RequestParam(defaultValue = "albume,asc") String sortBy) {
+            @RequestParam(defaultValue = "album,asc") String sortBy) {
         try {
             Pageable pg = PageableFactory.getPageable(pageNo, pageSize, sortBy);
             return new ResponseEntity<>(
