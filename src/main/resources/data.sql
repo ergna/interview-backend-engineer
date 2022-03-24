@@ -1,3 +1,7 @@
+delete from IMAGES;
+delete from ALBUMS;
+delete from USERS;
+
 insert into USERS (ID, NAME, EMAIL, address_geo_lat, address_geo_lng)
     values
         (1, 'Leanne Graham', 'Sincere@april.biz', -37.3158, 81.1496),
